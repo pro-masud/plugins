@@ -28,3 +28,18 @@ function create_block_card_block_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'create_block_card_block_block_init' );
+
+function card_block_categories($categories, $post){
+	 // Add the custom category.
+	 $custom_category = [
+        [
+            'slug'  => 'CardBlock',
+            'title' => 'Card Block',
+        ]
+    ];
+    
+    // Merge the custom category with the existing ones.
+    return array_merge($custom_category, $categories);
+}
+
+add_filter( 'block_categories', 'card_block_categories', 10, 2 );

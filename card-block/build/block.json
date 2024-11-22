@@ -4,7 +4,7 @@
   "name": "create-block/card-block",
   "version": "0.1.0",
   "title": "Card Block",
-  "category": "widgets",
+  "category": "CardBlock",
   "icon": {
     "src": "smiley",
     "background": "red",
