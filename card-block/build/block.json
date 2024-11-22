@@ -5,7 +5,11 @@
   "version": "0.1.0",
   "title": "Card Block",
   "category": "widgets",
-  "icon": "smiley",
+  "icon": {
+    "src": "smiley",
+    "background": "red",
+    "foreground": "white"
+  },
   "keywords": [
     "helllo",
     "Pro"
