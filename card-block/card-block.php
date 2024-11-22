@@ -30,6 +30,10 @@ function create_block_card_block_block_init() {
 add_action( 'init', 'create_block_card_block_block_init' );
 
 function card_block_categories($categories, $post){
+
+	if( 'page' !== get_post_type( $post )){
+		return $categories;
+	}
 	 // Add the custom category.
 	 $custom_category = [
         [
