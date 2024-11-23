@@ -1,0 +1,23 @@
+{
+  "apiVersion": 2,
+  "name": "my-plugin/about-block",
+  "title": "About Block",
+  "category": "widgets",
+  "icon": "admin-users",
+  "description": "Displays an about section.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "About Us"
+    },
+    "description": {
+      "type": "string",
+      "default": "We are a passionate team dedicated to creating awesome things."
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

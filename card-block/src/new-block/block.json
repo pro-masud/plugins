@@ -1,0 +1,12 @@
+{
+    "apiVersion": 2,
+    "name": "card-block/new-block",
+    "title": "New Block",
+    "category": "CardBlock",
+    "icon": "smiley",
+    "description": "A new custom block for your plugin.",
+    "keywords": ["new", "custom"],
+    "version": "1.0.0",
+    "textdomain": "card-block",
+    "editorScript": "file:./index.js"
+  }  
