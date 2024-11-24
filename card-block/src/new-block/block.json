@@ -9,7 +9,8 @@
   "supports": {
     "align": [ "left", "right", "center" ],
     "anchor": true,
-    "customClassName": false
+    "customClassName": false,
+    "className":false
   },
   "version": "1.0.0",
   "textdomain": "card-block",
