@@ -14,7 +14,8 @@
       "left",
       "right",
       "center"
-    ]
+    ],
+    "anchor": true
   },
   "version": "1.0.0",
   "textdomain": "card-block",

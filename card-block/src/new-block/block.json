@@ -1,16 +1,17 @@
 {
-    "apiVersion": 2,
-    "name": "card-block/new-block",
-    "title": "New Block",
-    "category": "CardBlock",
-    "icon": "smiley",
-    "description": "A new custom block for your plugin.",
-    "keywords": ["new", "custom"],
-    "supports": {
-      "align": [ "left", "right", "center" ]
-    },
-    "version": "1.0.0",
-    "textdomain": "card-block",
-    "editorScript": "file:./index.js",
-    "style": "file:./style.css"
-  } 
+  "apiVersion": 2,
+  "name": "card-block/new-block",
+  "title": "New Block",
+  "category": "CardBlock",
+  "icon": "smiley",
+  "description": "A new custom block for your plugin.",
+  "keywords": ["new", "custom"],
+  "supports": {
+    "align": [ "left", "right", "center" ],
+    "anchor": true
+  },
+  "version": "1.0.0",
+  "textdomain": "card-block",
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css"
+}
