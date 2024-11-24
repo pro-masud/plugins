@@ -16,11 +16,23 @@
       "right",
       "center"
     ],
-    "anchor": true,
-    "context": [
-      "widget-area"
-    ]
+    "anchor": true
   },
+  "styles": [
+    {
+      "name": "red",
+      "isDefault": true,
+      "label": "RED"
+    },
+    {
+      "name": "black",
+      "label": "Black"
+    },
+    {
+      "name": "green",
+      "label": "GREEN"
+    }
+  ],
   "example": {},
   "version": "1.0.0",
   "textdomain": "card-block",
