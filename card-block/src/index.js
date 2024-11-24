@@ -21,6 +21,7 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import './new-block'; // New block
+import './notification'; // New block
 
 
 /**

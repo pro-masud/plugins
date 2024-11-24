@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "card-block/notification",
+  "title": "Notification",
+  "category": "CardBlock",
+  "icon": "smiley",
+  "description": "A new custom block for your plugin.",
+  "keywords": [
+    "Notification",
+    "Notification"
+  ],
+  "supports": {
+    "align": [
+      "left",
+      "right",
+      "center"
+    ],
+    "anchor": true,
+    "context": [
+      "widget-area"
+    ]
+  },
+  "example": {},
+  "version": "1.0.0",
+  "textdomain": "card-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style.css",
+  "viewScript": "file:./view.js"
+}

@@ -7,11 +7,9 @@
   "description": "A new custom block for your plugin.",
   "keywords": ["new", "custom"],
   "supports": {
-    "align": [ "left", "right", "center" ],
-    "anchor": true,
-    "customClassName": false,
-    "className":false
+    "html":false
   },
+  "example": {},
   "version": "1.0.0",
   "textdomain": "card-block",
   "editorScript": "file:./index.js",
