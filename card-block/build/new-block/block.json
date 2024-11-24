@@ -9,7 +9,11 @@
     "new",
     "custom"
   ],
+  "supports": {
+    "align": true
+  },
   "version": "1.0.0",
   "textdomain": "card-block",
-  "editorScript": "file:./index.js"
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css"
 }
