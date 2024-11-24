@@ -7,7 +7,7 @@
     "description": "A new custom block for your plugin.",
     "keywords": ["new", "custom"],
     "supports": {
-      "align": true
+      "align": [ "left", "right", "center" ]
     },
     "version": "1.0.0",
     "textdomain": "card-block",
