@@ -8,7 +8,8 @@
   "keywords": ["new", "custom"],
   "supports": {
     "align": [ "left", "right", "center" ],
-    "anchor": true
+    "anchor": true,
+    "customClassName": false
   },
   "version": "1.0.0",
   "textdomain": "card-block",
