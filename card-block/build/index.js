@@ -238,8 +238,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const STYLES = [{
   name: 'red',
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Red', 'card-block'),
-  isDefault: true
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Red', 'card-block')
 }, {
   name: 'green',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Green', 'card-block')
@@ -248,7 +247,8 @@ const STYLES = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Black', 'card-block')
 }, {
   name: 'orange',
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('orange', 'card-block')
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Orange', 'card-block'),
+  isDefault: true
 }];
 function getStyleElements(styles, styleName) {
   let style = styles.find(style => style.name === styleName);

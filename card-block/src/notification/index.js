@@ -8,7 +8,7 @@ const STYLES = [
     {
         name: 'red',
         label: __('Red', 'card-block'),
-        isDefault: true,
+       
     },
     {
         name: 'green',
@@ -20,7 +20,8 @@ const STYLES = [
     },
     {
         name: 'orange',
-        label: __('orange', 'card-block'),
+        label: __('Orange', 'card-block'),
+        isDefault: true,
     }
 ];
 
