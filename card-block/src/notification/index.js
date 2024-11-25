@@ -18,31 +18,65 @@ const STYLES = [
         name: 'black',
         label: __('Black', 'card-block'),
     },
+    {
+        name: 'orange',
+        label: __('orange', 'card-block'),
+    }
 ];
+
+function getStyleElements(styles, styleName) {
+    let style = styles.find(style => style.name === styleName);
+    return style ? style.name : 'red'; // Default to "red" if not found
+}
 
 // Register the block
 registerBlockType('card-block/notification', {
     apiVersion: 2,
     name: 'card-block/notification',
     title: __('Notification', 'card-block'),
-    category: 'widgets',
+    category: 'CardBlock',
     icon: 'smiley',
     example: {},
     styles: STYLES,
+    attributes: {
+        style: {
+            type: 'string',
+            default: 'red', // Default style
+        },
+    },
 
-    edit: (props) => {
+    edit: ({ attributes, setAttributes }) => {
+        const { style } = attributes;
+
+        // Ensure the selected style is valid
+        const selectedStyle = getStyleElements(STYLES, style);
+
+        // Set the attribute if it is not already set
+        if (style !== selectedStyle) {
+            setAttributes({ style: selectedStyle });
+        }
+
+        const blockProps = useBlockProps({
+            className: selectedStyle, // Apply selected style as a class
+        });
+
         return (
-            <div {...useBlockProps()}>
-                <h2 className="heading">{__('Notification', 'card-block')}</h2>
+            <div {...blockProps}>
+                <h2>{__('Notification', 'card-block')}</h2>
             </div>
         );
     },
 
-    save: (props) => {
-        console.log('Save Props:', props);
+    save: ({ attributes }) => {
+        const { style } = attributes;
+
+        const blockProps = useBlockProps.save({
+            className: style, // Apply style class for frontend
+        });
+
         return (
-            <div { ...useBlockProps.save()}>
-                <h2 className="heading">{__('Notification', 'card-block')}</h2>
+            <div {...blockProps}>
+                <h2>{__('Notification', 'card-block')}</h2>
             </div>
         );
     },

@@ -246,32 +246,69 @@ const STYLES = [{
 }, {
   name: 'black',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Black', 'card-block')
+}, {
+  name: 'orange',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('orange', 'card-block')
 }];
+function getStyleElements(styles, styleName) {
+  let style = styles.find(style => style.name === styleName);
+  return style ? style.name : 'red'; // Default to "red" if not found
+}
 
 // Register the block
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('card-block/notification', {
   apiVersion: 2,
   name: 'card-block/notification',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Notification', 'card-block'),
-  category: 'widgets',
+  category: 'CardBlock',
   icon: 'smiley',
   example: {},
   styles: STYLES,
-  edit: props => {
+  attributes: {
+    style: {
+      type: 'string',
+      default: 'red' // Default style
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const {
+      style
+    } = attributes;
+
+    // Ensure the selected style is valid
+    const selectedStyle = getStyleElements(STYLES, style);
+
+    // Set the attribute if it is not already set
+    if (style !== selectedStyle) {
+      setAttributes({
+        style: selectedStyle
+      });
+    }
+    const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
+      className: selectedStyle // Apply selected style as a class
+    });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(),
+      ...blockProps,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        className: "heading",
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Notification', 'card-block')
       })
     });
   },
-  save: props => {
-    console.log('Save Props:', props);
+  save: ({
+    attributes
+  }) => {
+    const {
+      style
+    } = attributes;
+    const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
+      className: style // Apply style class for frontend
+    });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save(),
+      ...blockProps,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        className: "heading",
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Notification', 'card-block')
       })
     });
