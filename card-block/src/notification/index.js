@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, PlainText } from '@wordpress/block-editor';
 import './style.scss';
 
 // Define block styles
@@ -44,9 +44,13 @@ registerBlockType('card-block/notification', {
             type: 'string',
             default: 'red', // Default style
         },
+        "content": {
+            "type": "string",
+        }
     },
+    "style": "file:./style.scss",
 
-    edit: ({ attributes, setAttributes }) => {
+    edit: ({ className, attributes, setAttributes }) => {
         const { style } = attributes;
 
         // Ensure the selected style is valid
@@ -58,26 +62,31 @@ registerBlockType('card-block/notification', {
         }
 
         const blockProps = useBlockProps({
-            className: selectedStyle, // Apply selected style as a class
+            className: selectedStyle,
         });
 
         return (
             <div {...blockProps}>
-                <h2>{__('Notification', 'card-block')}</h2>
+                <h2 className={className}>
+                    <PlainText
+                        onChange={(content) => setAttributes({ content })}
+                        value={attributes.content}
+                    />
+                </h2>
             </div>
         );
     },
 
     save: ({ attributes }) => {
-        const { style } = attributes;
+        const { className } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: style, // Apply style class for frontend
+            className: className,
         });
 
         return (
             <div {...blockProps}>
-                <h2>{__('Notification', 'card-block')}</h2>
+                <h2 className={className}>{__('Notification', 'card-block')}</h2>
             </div>
         );
     },

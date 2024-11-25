@@ -268,9 +268,14 @@ function getStyleElements(styles, styleName) {
     style: {
       type: 'string',
       default: 'red' // Default style
+    },
+    "content": {
+      "type": "string"
     }
   },
+  "style": "file:./style.scss",
   edit: ({
+    className,
     attributes,
     setAttributes
   }) => {
@@ -288,12 +293,18 @@ function getStyleElements(styles, styleName) {
       });
     }
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-      className: selectedStyle // Apply selected style as a class
+      className: selectedStyle
     });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       ...blockProps,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Notification', 'card-block')
+        className: className,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PlainText, {
+          onChange: content => setAttributes({
+            content
+          }),
+          value: attributes.content
+        })
       })
     });
   },
@@ -301,14 +312,15 @@ function getStyleElements(styles, styleName) {
     attributes
   }) => {
     const {
-      style
+      className
     } = attributes;
     const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
-      className: style // Apply style class for frontend
+      className: className
     });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       ...blockProps,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+        className: className,
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Notification', 'card-block')
       })
     });
