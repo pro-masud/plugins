@@ -269,8 +269,9 @@ function getStyleElements(styles, styleName) {
       type: 'string',
       default: 'red' // Default style
     },
-    "content": {
-      "type": "string"
+    content: {
+      "type": "string",
+      "default": "information"
     }
   },
   "style": "file:./style.scss",
@@ -300,6 +301,7 @@ function getStyleElements(styles, styleName) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
         className: className,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PlainText, {
+          className: className,
           onChange: content => setAttributes({
             content
           }),
@@ -321,7 +323,7 @@ function getStyleElements(styles, styleName) {
       ...blockProps,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
         className: className,
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Notification', 'card-block')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(attributes.content, 'card-block')
       })
     });
   }

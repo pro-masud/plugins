@@ -44,8 +44,9 @@ registerBlockType('card-block/notification', {
             type: 'string',
             default: 'red', // Default style
         },
-        "content": {
+        content: {
             "type": "string",
+            "default": "information"
         }
     },
     "style": "file:./style.scss",
@@ -69,6 +70,7 @@ registerBlockType('card-block/notification', {
             <div {...blockProps}>
                 <h2 className={className}>
                     <PlainText
+                        className={className}
                         onChange={(content) => setAttributes({ content })}
                         value={attributes.content}
                     />
@@ -86,7 +88,7 @@ registerBlockType('card-block/notification', {
 
         return (
             <div {...blockProps}>
-                <h2 className={className}>{__('Notification', 'card-block')}</h2>
+                <h2 className={className}>{__(attributes.content, 'card-block')}</h2>
             </div>
         );
     },
