@@ -3,11 +3,17 @@
     "description": "A simple and flexible authentication library for PHP projects.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
-    "autoload": {
+    "authors": [
+        {
+            "name": "masudrana",
+            "email": "promasudbd@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+        "autoload": {
         "psr-4": {
             "Layerdrops\\Auth\\": "includes/"
         }
     },
-    "minimum-stability": "dev",
     "require": {}
 }

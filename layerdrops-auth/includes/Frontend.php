@@ -1,6 +1,6 @@
 <?php 
 namespace Layerdrops\Auth;
 
-class Assets {
+class Frontend{
     
 }

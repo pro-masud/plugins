@@ -13,6 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
+/**
+ * Composer Autoload File Path Here
+ */ 
+include_once __DIR__ . "/vendor/autoload.php"; 
+
+
 final class LAYERDROPS_AUTH {
 
     const version = '1.0';
@@ -60,22 +66,13 @@ final class LAYERDROPS_AUTH {
     public function layerdrops_auth_init_plugin() {
 
         // Assets can be initialized here
-        // Example: new Promasud\MR_9\Assets();
+        new Promasud\MR_9\Assets();
 
-        // Handle AJAX requests if applicable
-        // Example: if (defined('DOING_AJAX') && DOING_AJAX) { new Promasud\MR_9\Ajax(); }
-        
-        // Separate admin and frontend functionalities
-        if (is_admin()) {
-            // Admin-specific logic can be loaded here
-            // Example: new Promasud\MR_9\Admin();
-        } else {
-            // Frontend-specific logic can be loaded here
-            // Example: new Promasud\MR_9\Frontend();
+        if(is_admin()){
+            new Promasud\MR_9\Admin();
+        }else{
+            new Promasud\MR_9\Frontend();
         }
-
-        // Additional API functionalities can be added
-        // Example: new Promasud\MR_9\APIs();
     }
 
     /**
