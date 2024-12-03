@@ -66,12 +66,12 @@ final class LAYERDROPS_AUTH {
     public function layerdrops_auth_init_plugin() {
 
         // Assets can be initialized here
-        new Promasud\MR_9\Assets();
+        new Layerdrops\Auth\Assets();
 
         if(is_admin()){
-            new Promasud\MR_9\Admin();
+            new Layerdrops\Auth\Admin();
         }else{
-            new Promasud\MR_9\Frontend();
+            new Layerdrops\Auth\Frontend();
         }
     }
 

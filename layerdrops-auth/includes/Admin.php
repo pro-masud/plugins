@@ -1,8 +1,8 @@
 <?php
-namespace Promasud\MR_9;
+namespace Layerdrops\Auth;
 
 class Admin{
-    
+
     public function __construct(){
         new Admin\Menus();
     }
