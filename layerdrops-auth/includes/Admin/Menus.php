@@ -1,5 +1,5 @@
 <?php 
-namespace Layerdrops\Auth\Admin; // Defines the namespace for organizing the Admin class within Layerdrops\Auth.
+namespace Layerdrops\Auth\Admin;
 
 class Menus {
 
@@ -18,8 +18,8 @@ class Menus {
 
         // Add a top-level menu page to the WordPress admin panel.
         add_menu_page(
-            __('LDA', 'layerdrops-auth'), // Page title
-            __('LDA', 'layerdrops-auth'), // Menu title
+            __('LD Auth', 'layerdrops-auth'), // Page title
+            __('LD Auth', 'layerdrops-auth'), // Menu title
             $capability, // Capability required to access the menu
             $parent_slug, // Menu slug
             [ $this, 'layerdrops_auth_plugin_page' ], // Callback function to display the page content
@@ -36,18 +36,17 @@ class Menus {
     // Callback function to display the main plugin settings page.
     public function layerdrops_auth_plugin_page() {
         $this->options = get_option('layerdrops_auth_options'); // Retrieve the stored options.
-
         ?>
-        <div class="wrap">
-            <form action="options.php" method="post">
-                <?php 
-                    // Render the settings fields and sections for this form.
-                    settings_fields('layerdrops_auth_main_options_group');
-                    do_settings_sections('wp-dark-mode-admin-section-page');
-                    submit_button(); // Display the save settings button.
-                ?>
-            </form>
-        </div>
+            <div class="wrap">
+                <form action="options.php" method="post">
+                    <?php 
+                        // Render the settings fields and sections for this form.
+                        settings_fields('layerdrops_auth_main_options_group');
+                        do_settings_sections('wp-dark-mode-admin-section-page');
+                        submit_button(); // Display the save settings button.
+                    ?>
+                </form>
+            </div>
         <?php
     }
 
@@ -73,8 +72,8 @@ class Menus {
     // Private method to set up the settings section.
     private function init_settings_sections() {
         add_settings_section(
-            'wp_dark_mode_main_section', // Unique identifier for the section.
-            __( 'Custom Position', 'wp-dark-mode' ), // Title of the section.
+            'google_client_id_layerdrops_auth_section', // Unique identifier for the section.
+            __( 'Google Authentication', 'wp-dark-mode' ), // Title of the section.
             [ $this, 'wp_dark_mode_print_main_section_info' ], // Callback to display additional information.
             'wp-dark-mode-admin-section-page' // Page ID where the section will appear.
         );
@@ -87,37 +86,38 @@ class Menus {
 
     // Private method to set up the settings fields within the section.
     private function init_settings_fields() {
-        // Add fields for the settings page.
+
         add_settings_field(
-            'wp_dark_mode_bottom', // Unique ID for the field.
-            __( 'Bottom Position', 'wp-dark-mode' ), // Label for the field.
+            'google_client_name', // Unique ID for the field.
+            __( 'Application Name', 'wp-dark-mode' ), // Label for the field.
             [ $this, 'wp_dark_mode_bottom_callback' ], // Callback to render the input.
             'wp-dark-mode-admin-section-page', // Page ID where the field will appear.
-            'wp_dark_mode_main_section' // Section ID where the field will be added.
+            'google_client_id_layerdrops_auth_section' // Section ID where the field will be added.
+        );
+
+        // Add fields for the settings page.
+        add_settings_field(
+            'google_client_id', // Unique ID for the field.
+            __( 'Google Client ID', 'wp-dark-mode' ), // Label for the field.
+            [ $this, 'wp_dark_mode_bottom_callback' ], // Callback to render the input.
+            'wp-dark-mode-admin-section-page', // Page ID where the field will appear.
+            'google_client_id_layerdrops_auth_section' // Section ID where the field will be added.
         );
 
         add_settings_field(
-            'wp_dark_mode_left',
-            __( 'Left Position', 'wp-dark-mode' ),
-            [ $this, 'wp_dark_mode_left_callback' ],
-            'wp-dark-mode-admin-section-page',
-            'wp_dark_mode_main_section'
+            'google_client_secret', // Unique ID for the field.
+            __( 'Google Client Secret', 'wp-dark-mode' ), // Label for the field.
+            [ $this, 'wp_dark_mode_bottom_callback' ], // Callback to render the input.
+            'wp-dark-mode-admin-section-page', // Page ID where the field will appear.
+            'google_client_id_layerdrops_auth_section' // Section ID where the field will be added.
         );
 
         add_settings_field(
-            'wp_dark_mode_right',
-            __( 'Right Position', 'wp-dark-mode' ),
-            [ $this, 'wp_dark_mode_right_callback' ],
-            'wp-dark-mode-admin-section-page',
-            'wp_dark_mode_main_section'
-        );
-
-        add_settings_field(
-            'wp_dark_mode_sipo_section',
-            __( 'Show in Posts Only', 'wp-dark-mode' ),
-            [ $this, 'wp_dark_mode_sipo_callback' ],
-            'wp-dark-mode-admin-section-page',
-            'wp_dark_mode_main_section'
+            'google_redirect_url', // Unique ID for the field.
+            __( 'Side Redirect Uri', 'wp-dark-mode' ), // Label for the field.
+            [ $this, 'wp_dark_mode_bottom_callback' ], // Callback to render the input.
+            'wp-dark-mode-admin-section-page', // Page ID where the field will appear.
+            'google_client_id_layerdrops_auth_section' // Section ID where the field will be added.
         );
     }
 
@@ -125,35 +125,8 @@ class Menus {
     public function wp_dark_mode_bottom_callback() {
         $value = $this->options['wp_dark_mode_bottom'] ?? ''; // Get the stored value or default to empty.
         printf(
-            '<input type="text" id="wp_dark_mode_bottom" placeholder="32px" name="layerdrops_auth_options[wp_dark_mode_bottom]" value="%s" />',
+            '<input type="text" class="regular-text" id="wp_dark_mode_bottom" placeholder="32px" name="layerdrops_auth_options[wp_dark_mode_bottom]" value="%s" />',
             esc_attr($value) // Sanitize the value for output.
-        );
-    }
-
-    // Callback function for the 'Left Position' field.
-    public function wp_dark_mode_left_callback() {
-        $value = $this->options['wp_dark_mode_left'] ?? ''; 
-        printf(
-            '<input type="text" id="wp_dark_mode_left" placeholder="32px" name="layerdrops_auth_options[wp_dark_mode_left]" value="%s" />',
-            esc_attr($value)
-        );
-    }
-
-    // Callback function for the 'Right Position' field.
-    public function wp_dark_mode_right_callback() {
-        $value = $this->options['wp_dark_mode_right'] ?? '';
-        printf(
-            '<input type="text" id="wp_dark_mode_right" placeholder="32px" name="layerdrops_auth_options[wp_dark_mode_right]" value="%s" />',
-            esc_attr($value)
-        );
-    }
-
-    // Callback function for the 'Show in Posts Only' checkbox.
-    public function wp_dark_mode_sipo_callback() {
-        $checked = $this->options['wp_dark_mode_sipo_section'] ?? 0; // Check the stored value or default to 0 (unchecked).
-        printf(
-            '<input type="checkbox" id="wp_dark_mode_sipo_section" name="layerdrops_auth_options[wp_dark_mode_sipo_section]" value="1" %s />',
-            checked(1, $checked, false)
         );
     }
 }

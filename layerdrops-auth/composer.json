@@ -15,5 +15,7 @@
             "Layerdrops\\Auth\\": "includes/"
         }
     },
-    "require": {}
+    "require": {
+        "google/apiclient": "^2.0@dev"
+    }
 }
