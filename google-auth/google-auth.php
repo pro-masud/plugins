@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Login With Google
+ * Plugin Name: Google Auth
  * Description: This plugin will add a Login with Google Button
- * Plugin URI: https://vicodemedia.com
- * Author: Victor Rusu
- * Version: 0.0.1
+ * Plugin URI: https://dev-masud-rana.netlify.app/
+ * Author: Masud Rana
+ * Version: 0.1.0
 **/
 
 //* Don't access this file directly
