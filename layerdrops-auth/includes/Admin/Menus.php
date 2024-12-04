@@ -81,7 +81,7 @@ class Menus {
 
     // Callback function to display additional information for the settings section.
     public function wp_dark_mode_print_main_section_info() {
-        echo esc_html("WP Dark Mode Settings Options"); // Display a description for the section.
+        echo esc_html("Securely authenticate users via Google OAuth for seamless access."); // Display a description for the section.
     }
 
     // Private method to set up the settings fields within the section.
@@ -115,6 +115,22 @@ class Menus {
         add_settings_field(
             'google_redirect_url', // Unique ID for the field.
             __( 'Side Redirect Uri', 'wp-dark-mode' ), // Label for the field.
+            [ $this, 'wp_dark_mode_bottom_callback' ], // Callback to render the input.
+            'wp-dark-mode-admin-section-page', // Page ID where the field will appear.
+            'google_client_id_layerdrops_auth_section' // Section ID where the field will be added.
+        );
+
+        add_settings_field(
+            'google_scope_one', // Unique ID for the field.
+            __( 'Client Scope One', 'wp-dark-mode' ), // Label for the field.
+            [ $this, 'wp_dark_mode_bottom_callback' ], // Callback to render the input.
+            'wp-dark-mode-admin-section-page', // Page ID where the field will appear.
+            'google_client_id_layerdrops_auth_section' // Section ID where the field will be added.
+        );
+
+        add_settings_field(
+            'google_scope_two', // Unique ID for the field.
+            __( 'Client Scope Two', 'wp-dark-mode' ), // Label for the field.
             [ $this, 'wp_dark_mode_bottom_callback' ], // Callback to render the input.
             'wp-dark-mode-admin-section-page', // Page ID where the field will appear.
             'google_client_id_layerdrops_auth_section' // Section ID where the field will be added.
