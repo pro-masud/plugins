@@ -8,24 +8,20 @@ class View {
     private $gClient;
     private $login_url;
 
-    public function __construct() {
-        $this->google_client_assets();
+    public function __construct() {    
+
+        $this->gClient = new Client();
+        $this->gClient->setClientId('1028134609395-i5b3okn0ujotsd5hlhhdlh2e0bktsrt2.apps.googleusercontent.com'); // Replace with your defined constant
+        $this->gClient->setClientSecret('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'); // Replace with your defined constant
+        $this->gClient->setApplicationName("Web Application");
+        $this->gClient->setRedirectUri(admin_url('admin-ajax.php?action=vm_login_google'));
+        $this->gClient->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");
+
+        $this->login_url = $this->gClient->createAuthUrl(); // Save login URL for later use
 
         add_shortcode('google-login', [$this, 'vm_login_with_google']);
         add_action('wp_ajax_vm_login_google', [$this, 'vm_login_google']);
         add_action('admin_init', [$this, 'add_google_ajax_actions']);
-    }
-
-    public function google_client_assets() {
-        $this->gClient = new Client();
-        $this->gClient->setClientId('1028134609395-i5b3okn0ujotsd5hlhhdlh2e0bktsrt2.apps.googleusercontent.com'); // Use environment variables for real use
-        $this->gClient->setClientSecret('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'); // Use environment variables for real use
-        $this->gClient->setApplicationName("Web Application");
-        $this->gClient->setRedirectUri('https://your-public-domain.com/wp-admin/admin-ajax.php?action=vm_login_google');
-        $this->gClient->addScope("https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile");
-
-
-        $this->login_url = $this->gClient->createAuthUrl();
     }
 
     public function vm_login_with_google() {
@@ -45,7 +41,7 @@ class View {
 
         if (!is_user_logged_in()) {
             if (!get_option('users_can_register')) {
-                return $btnContent . 'Registration is closed!';
+                return ($btnContent . '<div>Registration is closed!</div>');
             } else {
                 return $btnContent . '<a class="googleBtn" href="' . esc_url($this->login_url) . '">Login With Google</a>';
             }
@@ -56,19 +52,24 @@ class View {
     }
 
     public function vm_login_google() {
+
+        $gClient = $this->gClient;
+
+        // Check if 'code' is set in GET request
         if (isset($_GET['code'])) {
-            $token = $this->gClient->fetchAccessTokenWithAuthCode($_GET['code']);
+            $token = $gClient->fetchAccessTokenWithAuthCode($_GET['code']);
             if (!isset($token['error'])) {
-                $oAuth = new Google_Service_Oauth2($this->gClient);
+                $oAuth = new Google_Service_Oauth2($gClient);
                 $userData = $oAuth->userinfo_v2_me->get();
 
-                var_dump($userData);
-
+                // Check if user already exists
                 if (!email_exists($userData->email)) {
+                    // Generate random password
                     $bytes = openssl_random_pseudo_bytes(2);
                     $password = md5(bin2hex($bytes));
                     $user_login = $userData->id;
 
+                    // Create a new user
                     $new_user_id = wp_insert_user([
                         'user_login'     => $user_login,
                         'user_pass'      => $password,
@@ -80,30 +81,33 @@ class View {
                     ]);
 
                     if ($new_user_id) {
+                        // Notify admin of new user registration
                         wp_new_user_notification($new_user_id);
 
+                        // Log the user in
                         wp_set_current_user($new_user_id);
                         wp_set_auth_cookie($new_user_id, true);
+
+                        // Redirect to home page
                         wp_redirect(home_url());
                         exit;
                     }
                 } else {
+                    // Log in existing user
                     $user = get_user_by('email', $userData->email);
                     wp_set_current_user($user->ID);
                     wp_set_auth_cookie($user->ID, true);
+
+                    // Redirect to home page
                     wp_redirect(home_url());
                     exit;
                 }
-            } else {
-                // Log token error for debugging
-                error_log('Google token error: ' . print_r($token, true));
-                wp_redirect(home_url());
-                exit();
             }
-        } else {
-            wp_redirect(home_url());
-            exit();
         }
+
+        // Redirect to home if no code
+        wp_redirect(home_url());
+        exit;
     }
 
     public function add_google_ajax_actions() {

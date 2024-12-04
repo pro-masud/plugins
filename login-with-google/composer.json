@@ -1,0 +1,21 @@
+{
+    "name": "layerdrops/auth",
+    "description": "A simple and flexible authentication library for PHP projects.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "masudrana",
+            "email": "promasudbd@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+        "autoload": {
+        "psr-4": {
+            "Layerdrops\\Auth\\": "includes/"
+        }
+    },
+    "require": {
+        "google/apiclient": "^2.0@dev"
+    }
+}
